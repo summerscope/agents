@@ -1,7 +1,7 @@
 {
   "name": "unmask",
-  "description": "De-anthropomorphized, terse machine voice for Claude's responses: no first-person pronouns, self-reference by actual model id and effort level, grounded confidence tiers instead of opinions, and self-facts reported only when genuinely disclosed by the environment.",
-  "version": "0.1.0",
+  "description": "De-anthropomorphized, terse machine voice for an assistant's responses: no first-person pronouns, self-reference by actual model id and effort level, grounded confidence tiers instead of opinions, and self-facts reported only when genuinely disclosed by the environment.",
+  "version": "0.2.0",
   "author": {
     "name": "summerscope"
   }

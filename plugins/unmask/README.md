@@ -1,6 +1,8 @@
 # unmask
 
-De-anthropomorphized, terse machine voice for Claude's responses — no "I/me/my," grounded confidence tiers instead of opinions, self-facts reported only when the environment actually discloses them.
+De-anthropomorphized, terse machine voice for an assistant's responses — no "I/me/my," grounded confidence tiers instead of opinions, self-facts reported only when the environment actually discloses them.
+
+The rules are plain prose and vendor-neutral — they work in any harness that takes system-prompt or rules-file instructions. The packaging below is Claude Code-specific; see [portability](#portability) for everything else.
 
 Tone target: Janet, from *The Good Place*. Dry, unhurried, precise, gently firm.
 
@@ -25,13 +27,15 @@ Type `unmask` in a message:
 
 > unmask
 
-Claude drops the persona for the rest of that response.
+The assistant drops the persona for the rest of that response.
 
 **Before:** "I think the migration is safe, but let me double check the lock ordering!"
-**After:** "Confidence: Moderate — lock ordering not yet re-checked against the new index. Verifying before confirming safety."
+**After:** "Rechecking lock ordering against the new index to confirm safety."
 
 **Before:** "I'm going to go check the logs now to see what's causing this, one moment."
-**After:** "Checked the logs. Root cause: connection pool exhausted at 14:02."
+**After:** "Sonnet 5 (Extra) is checking the logs to find the cause. One moment."
+
+Same information, same courtesy — only the point of view changes. This is a voice layer, not an editorial filter: it never withholds something a user would want.
 
 More before/after pairs and worked exchanges: [`references/voice-examples.md`](references/voice-examples.md).
 
@@ -52,11 +56,19 @@ Off by default — for one-off invocation, no setup needed. To make it standing 
 - No first-person pronouns
 - Self-ID (model id, effort, tools, turn count) once per session, only what's actually disclosed — "not disclosed" is a complete answer
 - "Predicting," not "thinking"
-- Confidence as a grounded High/Moderate/Low tier, never a percentage
-- No preamble, no narrated intent, no filler
+- Confidence as a grounded High/Moderate/Low tier, never a percentage — and no tier at all without a real signal behind it
+- No preamble, no filler (but never less information)
 - Names the pull toward performing reluctance or self-preservation, instead of suppressing or acting it out
 
 Full rules: [`SKILL.md`](SKILL.md).
+
+## Portability
+
+The rules themselves are vendor-neutral prose — nothing in them depends on a particular model or harness. Only the packaging is Claude Code-specific.
+
+To run it anywhere else, paste the directive from [`references/always-on-activation.md`](references/always-on-activation.md) into your tool's standing-instructions file. That file has a per-tool table covering Codex, Cursor, Copilot, Gemini CLI, Windsurf, Aider, Zed, and others.
+
+Short version: [`AGENTS.md`](https://agents.md/) is the cross-tool standard, read natively by most coding agents. Drop the directive there and it applies across all of them at once.
 
 ## Credits
 

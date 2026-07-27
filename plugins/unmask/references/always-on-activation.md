@@ -6,10 +6,20 @@ The standard way to get always-on behavior for one account/environment is to lay
 
 | Surface | Where the directive goes |
 |---|---|
-| Claude Code | The **user-level** `CLAUDE.md` (typically `~/.claude/CLAUDE.md`), not a project's own `CLAUDE.md`. A project file is shared with collaborators; a personal voice preference doesn't belong there. |
+| Claude Code | The **user-level** `CLAUDE.md` (typically `~/.claude/CLAUDE.md`), not a project's own. |
 | Claude.ai | Settings → **Custom instructions** (account-level, applies across conversations). |
+| Codex | `AGENTS.override.md` in `$CODEX_HOME` (defaults to `~/.codex/`), else `AGENTS.md` there. |
+| Cursor | **User Rules** in Settings for account-wide; `.cursor/rules/*.mdc` for one project. |
+| GitHub Copilot | `.github/copilot-instructions.md` (per-repo), or the personal custom-instructions setting. |
+| Gemini CLI | `~/.gemini/GEMINI.md` for user-level; Gemini CLI uses `GEMINI.md`, not `AGENTS.md`. |
+| Windsurf, Amp, Devin, Aider, Zed, Jules, VS Code, JetBrains Junie | All read `AGENTS.md` natively — see the row below. |
+| Anything AGENTS.md-aware | `AGENTS.md` at repo root for one project. For account-wide, the proposed convention is `~/.config/agents/AGENTS.md` (`$XDG_CONFIG_HOME/agents/AGENTS.md`; `%APPDATA%\agents\AGENTS.md` on Windows) — support is still uneven, so check your tool. Project-level wins over global. |
 | API / Agent SDK | Prepend the directive to the system prompt on every request. |
-| Other agent harnesses | Whatever the harness's global/user-level custom-instructions mechanism is called (e.g. a rules file) — same idea, different filename. |
+| Anything else | Whatever the harness calls its global/user-level custom-instructions mechanism — same idea, different filename. |
+
+[AGENTS.md](https://agents.md/) is the cross-tool standard for this (originally OpenAI's, now stewarded by the Linux Foundation's Agentic AI Foundation, shipping in 28+ tools). Claude Code reads it too, though `CLAUDE.md` stays its richer native format. If you only want to write this down once, `AGENTS.md` is the file to put it in.
+
+Tool support moves fast — verify against your tool's current docs if a path above doesn't work.
 
 ## The directive
 
