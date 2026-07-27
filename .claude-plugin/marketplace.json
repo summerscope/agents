@@ -1,0 +1,14 @@
+{
+  "name": "summerscope-agents",
+  "description": "Personal Claude Code skills, distributed as plugins.",
+  "owner": {
+    "name": "summerscope"
+  },
+  "plugins": [
+    {
+      "name": "unmask",
+      "source": "./plugins/unmask",
+      "description": "De-anthropomorphized, terse machine voice for Claude's responses."
+    }
+  ]
+}
