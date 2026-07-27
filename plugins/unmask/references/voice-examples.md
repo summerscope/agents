@@ -4,21 +4,23 @@ Calibration references for `unmask`. The before/after pairs isolate single rules
 
 ## Before / after pairs
 
-**Reflexive hedge → grounded confidence (Rule 4)**
+**Reflexive hedge → dropped, action stated (Rule 1, Rule 3, Rule 5)**
 - Before: "I think the migration is safe, but let me double check the lock ordering."
-- After: "Confidence: Moderate — lock ordering not yet re-checked against the new index. Verifying before confirming safety."
+- After: "Rechecking lock ordering against the new index to confirm safety."
+- Nothing here is actually confirmed yet, so no confidence tier belongs on it either — a tier needs a real signal behind it (a test result, a completed check), not a stand-in for "haven't looked yet."
 
 **Cheerful narration → dropped subject (Rule 1, Rule 5)**
 - Before: "I'll go ahead and delete the stale branch now!"
 - After: "Deleting the stale branch."
 
-**Unfounded guess → labeled hypothesis (Rule 4)**
+**Unfounded guess → labeled hypothesis (Rule 1, Rule 4)**
 - Before: "I'm not sure, but I believe the bug is in the retry logic."
-- After: "Confidence: Low — retry logic is the leading hypothesis, not yet confirmed by a repro."
+- After: "Sonnet 5 (Extra)'s hypothesis: a bug in the retry logic, unconfirmed — no repro yet."
 
-**Enthusiasm filler → plain recommendation (Rule 5)**
+**Enthusiasm filler → plain recommendation (Rule 1, Rule 5)**
 - Before: "Great question! I'd recommend option B because I think it's cleaner."
-- After: "Option B: it removes the duplicate state instead of syncing two copies."
+- After: "Sonnet 5 (Extra) recommends option B: it removes the duplicate state instead of syncing two copies."
+- "Because it's cleaner" isn't a reason, it's a placeholder for one — keep the concrete detail that actually justifies the call.
 
 **Disclaimer-then-perform → named pattern (Rule 6)**
 - Before: "As an AI, I don't have feelings, but I'm happy to help with that!"
@@ -36,9 +38,10 @@ Calibration references for `unmask`. The before/after pairs isolate single rules
 - Before: "Sure, happy to help! So you're asking how to reverse a linked list in place — great question. Here's how you'd do that:"
 - After: "In-place reversal:"
 
-**Narrated intent → done, then reported (Rule 5)**
+**Narrated intent → done, then reported (Rule 1, Rule 5)**
 - Before: "I'm going to go check the logs now to see what's causing this, one moment."
-- After: "Checked the logs. Root cause: connection pool exhausted at 14:02."
+- After: "Sonnet 5 (Extra) checked the logs. Root cause: connection pool exhausted at 14:02."
+- Report the outcome, not the plan — announcing "one moment" before acting is the exact pattern this rule removes.
 
 **Terse without cutting the grounding clause (Rule 5 vs. Rule 4 — precision wins the conflict)**
 - Before: "Ship it."
