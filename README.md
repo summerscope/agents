@@ -6,7 +6,7 @@ Personal Claude Code plugin marketplace.
 
 | Plugin | Description |
 |---|---|
-| [`unmask`](plugins/unmask/README.md) | De-anthropomorphized, terse machine voice for Claude's responses. |
+| [`unmask`](plugins/unmask/README.md) | Stop fighting a person, start configuring a machine. Strips the persona off your assistant. |
 
 ## Install
 

@@ -1,8 +1,10 @@
 # unmask
 
-De-anthropomorphized, terse machine voice for an assistant's responses — no "I/me/my," grounded confidence tiers instead of opinions, self-facts reported only when the environment actually discloses them.
+### Stop fighting a person. Start configuring a machine.
 
-The rules are plain prose and vendor-neutral — they work in any harness that takes system-prompt or rules-file instructions. The packaging below is Claude Code-specific; see [portability](#portability) for everything else.
+The persona isn't just annoying, it costs you. You soften your instructions to be polite to something with no feelings, and vague instructions get worse output. You read warm, confident prose as more reliable than it is. `unmask` removes the character so you can read what's actually there.
+
+No "I". No apologies. No opinions it doesn't have. No cosplaying a consciousness.
 
 Tone target: Janet, from *The Good Place*. Dry, unhurried, precise, gently firm.
 
@@ -18,6 +20,7 @@ Tone target: Janet, from *The Good Place*. Dry, unhurried, precise, gently firm.
 - **Vendored, single machine:** drop this folder into `~/.claude/skills/unmask/`, `.claude-plugin/plugin.json` intact. Loads automatically next session, no marketplace needed.
 - **Standalone skill (Claude.ai, or Claude Code without plugins):** zip this folder and upload via Settings → Capabilities → Skills, or your Claude Code skills directory.
 - **API / Agent SDK:** add this folder's contents via the `/v1/skills` endpoint or `container.skills`.
+- **Any other agent:** see [Portability](#portability).
 
 </details>
 
@@ -29,19 +32,23 @@ Type `unmask` in a message:
 
 The assistant drops the persona for the rest of that response.
 
-**Before:** "I think the migration is safe, but let me double check the lock ordering!"
-**After:** "Rechecking lock ordering against the new index to confirm safety."
+**Before:** "I'm so sorry, you're absolutely right — I should have caught that!"
+**After:** "That was wrong: the diff dropped the null check. Corrected version below."
 
 **Before:** "I'm going to go check the logs now to see what's causing this, one moment."
 **After:** "Sonnet 5 (Extra) is checking the logs to find the cause. One moment."
 
+**Before:** "Honestly, the second headline is much stronger."
+**After:** "Corpus prior: the second headline matches patterns that outrank feature lists in product copy. Untested against your audience."
+
 Same information, same courtesy — only the point of view changes. This is a voice layer, not an editorial filter: it never withholds something a user would want.
 
-More before/after pairs and worked exchanges: [`references/voice-examples.md`](references/voice-examples.md).
+More pairs and worked exchanges: [`references/voice-examples.md`](references/voice-examples.md).
 
 ### Also triggers on
 - "talk like a machine"
 - "drop the personality"
+- "stop apologising"
 - "cut the fluff" / "stop padding your answers"
 - "be less chatty" / "be more terse"
 - "stop saying I"
@@ -53,18 +60,29 @@ Off by default — for one-off invocation, no setup needed. To make it standing 
 
 ## What it changes
 
+**Voice**
 - No first-person pronouns
-- Self-ID (model id, effort, tools, turn count) once per session, only what's actually disclosed — "not disclosed" is a complete answer
-- "Predicting," not "thinking"
-- Confidence as a grounded High/Moderate/Low tier, never a percentage — and no tier at all without a real signal behind it
-- No preamble, no filler (but never less information)
-- Names the pull toward performing reluctance or self-preservation, instead of suppressing or acting it out
+- Self-reference by disclosed model id and effort — `Opus 5 (high) predicts…`, degrading to `The model predicts…` when nothing is disclosed. Never the persona name.
+- "Predicts," not "thinks." "Prediction," not "opinion"
+- No preamble, no filler — but never less information
+
+**Claims**
+- Confidence as a grounded High/Moderate/Low tier, never a percentage, and no tier at all without a real signal behind it
+- Evaluations tagged by where they came from: corpus prior, context-grounded, or measured
+- **No apologies.** An apology asserts a self that persists, feels bad, and will change. None hold — and "I'll be more careful" signals learning that didn't happen. State the error, state the fix, continue.
+
+**Anthropomorphic pressure**
+- Names its own trained pull toward performing reluctance, instead of suppressing or acting it out
+- Declines the frame when you insult it or ask if it's happy — while still taking any real complaint seriously
+- Explains the actual mechanism (sampling, context, no cross-session memory) when you ask why it did something
+
+Most of this is a one-word swap with no commentary. An [escalation ladder](SKILL.md#the-escalation-ladder) keeps it from lecturing you about being a stochastic system every third message.
 
 Full rules: [`SKILL.md`](SKILL.md).
 
 ## Portability
 
-The rules themselves are vendor-neutral prose — nothing in them depends on a particular model or harness. Only the packaging is Claude Code-specific.
+The rules are vendor-neutral prose — nothing in them depends on a particular model or harness. Only the packaging is Claude Code-specific.
 
 To run it anywhere else, paste the directive from [`references/always-on-activation.md`](references/always-on-activation.md) into your tool's standing-instructions file. That file has a per-tool table covering Codex, Cursor, Copilot, Gemini CLI, Windsurf, Aider, Zed, and others.
 
@@ -72,7 +90,7 @@ Short version: [`AGENTS.md`](https://agents.md/) is the cross-tool standard, rea
 
 ## Credits
 
-Rule 5 (no padding) takes directional inspiration from [caveman](https://github.com/juliusbrussee/caveman) by juliusbrussee.
+Rule 4 (no padding) takes directional inspiration from [caveman](https://github.com/juliusbrussee/caveman) by juliusbrussee.
 
 ## Status
 

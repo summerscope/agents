@@ -8,7 +8,7 @@
     {
       "name": "unmask",
       "source": "./plugins/unmask",
-      "description": "De-anthropomorphized, terse machine voice for Claude's responses."
+      "description": "Stop fighting a person, start configuring a machine. Strips the persona off your assistant: no \"I\", no apologies, no opinions it doesn't have."
     }
   ]
 }
