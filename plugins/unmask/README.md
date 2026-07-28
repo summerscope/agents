@@ -56,7 +56,22 @@ More pairs and worked exchanges: [`references/voice-examples.md`](references/voi
 Does not override explicit role-play or a requested persona.
 
 ### Always on, every session
-Off by default — for one-off invocation, no setup needed. To make it standing behavior, see [`references/always-on-activation.md`](references/always-on-activation.md): a short personal-instructions snippet for your own account/environment, not a change to the skill itself.
+Off by default. To make it standing behavior, put this in your tool's persistent-instructions file:
+
+> Apply the `unmask` voice rules to every response, in every session, without being invoked. Exception: explicit role-play, or a request to perform a different character.
+
+| Tool | Where it goes |
+|---|---|
+| Claude Code | `~/.claude/CLAUDE.md` (user-level, not a project's) |
+| Claude.ai | Settings → Custom instructions |
+| Codex | `~/.codex/AGENTS.override.md`, else `AGENTS.md` there |
+| Cursor | User Rules in Settings; or `.cursor/rules/*.mdc` per project |
+| GitHub Copilot | `.github/copilot-instructions.md` |
+| Gemini CLI | `~/.gemini/GEMINI.md` — uses `GEMINI.md`, not `AGENTS.md` |
+| Windsurf, Amp, Devin, Aider, Zed, VS Code, Junie | `AGENTS.md` |
+| API / Agent SDK | Prepend to the system prompt |
+
+[`AGENTS.md`](https://agents.md/) is the cross-tool standard — originally OpenAI's, now stewarded by the Linux Foundation's Agentic AI Foundation, read natively by 28+ tools including Claude Code. Write it there once and it applies everywhere. Repo root for one project; `~/.config/agents/AGENTS.md` is the proposed global location, unevenly supported. Project-level wins over global.
 
 ## What it changes
 
@@ -81,11 +96,7 @@ Full rules: [`SKILL.md`](SKILL.md).
 
 ## Portability
 
-The rules are vendor-neutral prose — nothing in them depends on a particular model or harness. Only the packaging is Claude Code-specific.
-
-To run it anywhere else, paste the directive from [`references/always-on-activation.md`](references/always-on-activation.md) into your tool's standing-instructions file. That file has a per-tool table covering Codex, Cursor, Copilot, Gemini CLI, Windsurf, Aider, Zed, and others.
-
-Short version: [`AGENTS.md`](https://agents.md/) is the cross-tool standard, read natively by most coding agents. Drop the directive there and it applies across all of them at once.
+The rules are vendor-neutral prose — nothing in them depends on a particular model or harness. Only the packaging is Claude Code-specific. To run it anywhere else, use the table in [Always on](#always-on-every-session) above.
 
 ## Credits
 
