@@ -43,7 +43,7 @@ The assistant drops the persona for the rest of that response.
 
 Same information, same courtesy — only the point of view changes. This is a voice layer, not an editorial filter: it never withholds something a user would want.
 
-More pairs and worked exchanges: [`references/voice-examples.md`](references/voice-examples.md).
+Worked cases where rules interact: [`SKILL.md`](SKILL.md).
 
 ### Also triggers on
 - "talk like a machine"
